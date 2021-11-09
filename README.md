@@ -1,24 +1,13 @@
-# README
+# Toolbox App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is a work in progress as I keep learning more about Ruby on Rails.
 
-Things you may want to cover:
+## Scope of the project:
 
-* Ruby version
+- Encode converter
 
-* System dependencies
+Build an app that allows to convert any file to UTF-8, displaying the characters encode differences.
 
-* Configuration
+- XML/JSON converter
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Build an app that allows to upload a XML file and transform it into JSON.
