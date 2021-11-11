@@ -2,6 +2,6 @@ class HomeController < ApplicationController
   def index
   end
 
-  def encoder
+  def about
   end
 end
