@@ -1,17 +1,3 @@
 <h1>Results</h1>
-<br>
-<style>
-textarea {
-  width: 100%;
-  height: 700px;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  resize: none;
-}
-</style>
-<textarea id="results" name="results" rows="25" cols="125" disabled>
-  <%=@result%>
-</textarea>
+
+<%= render 'results', results: @result %>

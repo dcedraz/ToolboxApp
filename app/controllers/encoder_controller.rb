@@ -19,6 +19,7 @@ class EncoderController < ApplicationController
     file_data = userfile
     if file_data.respond_to?(:read)
       file_contents = file_data.read
+
     elsif file_data.respond_to?(:path)
       file_contents = File.read(file_data.path)
     else
