@@ -1,6 +1,6 @@
 <style>
 textarea {
-  width: 100%;
+  width: 50%;
   height: 500px;
   padding: 12px 20px;
   box-sizing: border-box;
@@ -8,12 +8,13 @@ textarea {
   border-radius: 4px;
   background-color: #f8f8f8;
   resize: none;
+  float: right
 }
 </style>
-<textarea id="results" name="results" rows="25" cols="125" disabled>
-  <% if results.nil? %>
+<textarea id="input" name="input" rows="25" cols="125">
+  <% if input.nil? %>
     <%="Please select a file or paste the values"%>
   <% else %>
-    <%=results%>
+    <%=input%>
   <% end %>
 </textarea>

@@ -1,0 +1,20 @@
+<style>
+textarea {
+  width: 50%;
+  height: 500px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+  float: left
+}
+</style>
+<textarea id="output" name="output" rows="25" cols="125" disabled>
+  <% if output.nil? %>
+    <%="You will see the results here"%>
+  <% else %>
+    <%=output%>
+  <% end %>
+</textarea>

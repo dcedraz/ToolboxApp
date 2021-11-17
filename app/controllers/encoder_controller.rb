@@ -2,29 +2,28 @@ class EncoderController < ApplicationController
   def index
   end
 
-  def uploads
-    @result = verify(uploads_params)
-  end
 
-  def upload(userfile)
-    uploaded_file = userfile
-    File.open(Rails.root.join('public', 'uploads', uploaded_file.original_filename), 'wb') do |file|
-    file.write(uploaded_file.read)
+  def upload
+    if params[:userfile] && !params[:userfile].blank?
+      file_data = uploads_params()
+    else
+      flash.now[:notice] = 'Please select a file first'
+      render "index"
+      #redirect_to :action => 'index'
+      return
     end
-  end
-
-  def verify(userfile)
-    # Note: use form validation to ensure that
-    # params[:uploaded_file] is not null
-    file_data = userfile
     if file_data.respond_to?(:read)
       file_contents = file_data.read
+      flash.now[:notice] = "File was successfully loaded."
 
     elsif file_data.respond_to?(:path)
       file_contents = File.read(file_data.path)
+      flash.now[:notice] = "File was successfully loaded."
     else
       logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
     end
+    @input = file_contents
+    render "index"
   end
 
   private
@@ -33,4 +32,5 @@ class EncoderController < ApplicationController
   def uploads_params
     params.require(:userfile)
   end
+
 end

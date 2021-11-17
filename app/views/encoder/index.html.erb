@@ -1,18 +1,27 @@
 <h1>Encoder Tool</h1>
 
   <div class="field form-group">
-<%= form_with url: encoder_uploads_path, multipart: true do |form| %>
+<%= form_with url: encoder_upload_path(), multipart: true do |form| %>
   <label for="formFileSm" class="form-label">Please select the file to be verified: </label>
   <%= form.file_field :userfile, class:"form-control form-control-sm" %>
   </div>
+
 <br>
 
 <div class="input-group mb-3">
   <div class="actions">
-    <%= form.submit "Verify", class:"btn btn-dark"%>
+    <% if form.nil?%>
+      <%= form.submit "Upload", class:"btn btn-dark disabled"%>
+    <% else %>
+      <%= form.submit "Upload", class:"btn btn-dark"%>
+    <% end %>
   </div>
 </div>
 
+  <%= render 'input', input: @input %>
+
 <% end %>
 
-<%= render 'results', results: @results %>
+<%= render 'output', output: @output %>
+
+<%= link_to 'Verify', @input, class:"btn btn-dark"  %>
