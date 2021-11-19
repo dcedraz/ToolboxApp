@@ -9,7 +9,8 @@ class EncoderController < ApplicationController
     else
       flash.now[:notice] = 'Please select a file first'
       render "index"
-      #redirect_to :action => 'index'
+      # Tried with redirect_to but it didnt work
+      #redirect_to action: 'index'
       return
     end
     if file_data.respond_to?(:read)

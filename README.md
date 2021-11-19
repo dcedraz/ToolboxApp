@@ -10,8 +10,9 @@ Build an app that allows to convert any file to UTF-8, displaying the characters
 
 **TODO list:**
 
-[ ] Form validation
-[ ]
+[X] Form validation
+
+[ ] Bug: Unable to process file too big. Might need to stop reading on memory and save the file temporary.
 
 [ ] Configure Rails Active Storage to store the files uploaded in the cloud somewhere to be defined yet.
 
