@@ -2,7 +2,6 @@ class EncoderController < ApplicationController
   def index
   end
 
-
   def upload
     if params[:userfile] && !params[:userfile].blank?
       file_data = uploads_params()
@@ -14,17 +13,21 @@ class EncoderController < ApplicationController
       return
     end
     if file_data.respond_to?(:read)
-      file_contents = file_data.read
+      @input = file_data.read
+      fileline = ""
+      File.foreach(file_data) { |line| fileline << line.encode("UTF-8", invalid: :replace, replace: "ERROR")}
       flash.now[:notice] = "File was successfully loaded."
 
     elsif file_data.respond_to?(:path)
-      file_contents = File.read(file_data.path)
+      @input = File.read(file_data.path)
+      File.foreach(file_data) { |line| fileline << line.encode("UTF-8", invalid: :replace, replace: "ERROR")}
       flash.now[:notice] = "File was successfully loaded."
     else
       logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
     end
-    @input = file_contents
+    @output = fileline
     render "index"
+
   end
 
   private

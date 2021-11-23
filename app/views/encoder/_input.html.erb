@@ -11,9 +11,9 @@ textarea {
   float: right
 }
 </style>
-<textarea id="input" name="input" rows="25" cols="125">
+<textarea id="input" name="input" rows="25" cols="125" disabled>
   <% if input.nil? %>
-    <%="Please select a file or paste the values"%>
+    <%="Please select a file"%>
   <% else %>
     <%=input%>
   <% end %>
