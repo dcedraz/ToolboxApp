@@ -13,19 +13,23 @@ class EncoderController < ApplicationController
       return
     end
     if file_data.respond_to?(:read)
-      @input = file_data.read
-      fileline = ""
-      File.foreach(file_data) { |line| fileline << line.encode("UTF-8", invalid: :replace, replace: "ERROR")}
+
+      #@input = file_data.read
+      @input = ""
+      @output = ""
+      File.foreach(file_data) { |line| @input << line}
+      File.foreach(file_data) { |line| @output << line.encode("UTF-8", invalid: :replace, replace: "ERROR")}
       flash.now[:notice] = "File was successfully loaded."
 
     elsif file_data.respond_to?(:path)
-      @input = File.read(file_data.path)
-      File.foreach(file_data) { |line| fileline << line.encode("UTF-8", invalid: :replace, replace: "ERROR")}
+      #@input = File.read(file_data.path)
+      File.foreach(file_data) { |line| @input << line}
+      File.foreach(file_data) { |line| @output << line.encode("UTF-8", invalid: :replace, replace: "ERROR")}
       flash.now[:notice] = "File was successfully loaded."
     else
       logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
     end
-    @output = fileline
+    @output
     render "index"
 
   end

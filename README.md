@@ -4,7 +4,7 @@ This application is a work in progress as I keep learning more about Ruby on Rai
 
 ## Scope of the project:
 
-### Encode converter
+### Encode converter - https://toolbox-dcedraz.herokuapp.com/
 
 Build an app that allows to convert any file to UTF-8, displaying the characters encode differences.
 
