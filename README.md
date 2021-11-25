@@ -1,10 +1,10 @@
-# Toolbox App
+# Toolbox App - https://toolbox-dcedraz.herokuapp.com/
 
 This application is a work in progress as I keep learning more about Ruby on Rails.
 
 ## Scope of the project:
 
-### Encode converter - https://toolbox-dcedraz.herokuapp.com/
+### Encode converter
 
 Build an app that allows to convert any file to UTF-8, displaying the characters encode differences.
 
@@ -12,9 +12,9 @@ Build an app that allows to convert any file to UTF-8, displaying the characters
 
 [X] Form validation
 
-[ ] Bug: Unable to process file too big. Might need to stop reading on memory and save the file temporary.
+[X] Bug: Unable to process file too big. Solved, not using "read" method anymore. 
 
-[ ] Configure Rails Active Storage to store the files uploaded in the cloud somewhere to be defined yet.
+[ ] Install Charlock_Holmes gem.
 
 ## XML/JSON converter
 
