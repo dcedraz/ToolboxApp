@@ -14,27 +14,30 @@ class EncoderController < ApplicationController
       return
     end
 
-    @input = ""
-    @output = ""
+    file_data.respond_to?(:read) ? file_converter(file_data) : flash.now[:notice] = "Invalid file format."
 
-    File.foreach(file_data) do |line|
-      if line.valid_encoding?
-
-        detection = CharlockHolmes::EncodingDetector.detect(line)
-        utf8_encoded_content = CharlockHolmes::Converter.convert line, detection[:encoding], 'UTF-8'
-        @input << utf8_encoded_content
-        @output << line.encode("UTF-8", invalid: :replace)
-      else
-        detection = CharlockHolmes::EncodingDetector.detect(line)
-        utf8_encoded_content = CharlockHolmes::Converter.convert line, detection[:encoding], 'UTF-8'
-        @input << utf8_encoded_content
-        @output << line.encode("UTF-8", invalid: :replace)
-      end
-    end
-
-    flash.now[:notice] = "File was successfully loaded."
+    #flash.now[:notice] = "File was successfully loaded."
 
     render "index"
+  end
+
+  def file_converter(file)
+
+    @input = ""
+    @output = ""
+    invalid_chars = 0
+
+    File.foreach(file) do |line|
+
+      detection = CharlockHolmes::EncodingDetector.detect(line)
+      utf8_encoded_content = CharlockHolmes::Converter.convert line, detection[:encoding], 'UTF-8'
+      @input << utf8_encoded_content
+      @output << line.encode("UTF-8", invalid: :replace)
+
+      invalid_chars += 1 if !(line.valid_encoding?)
+    end
+    flash.now[:notice] = "Found #{invalid_chars} invalid characters"
+
   end
 
   private
