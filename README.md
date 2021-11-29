@@ -10,11 +10,11 @@ Build an app that allows to convert any file to UTF-8, displaying the characters
 
 **TODO list:**
 
-[X] Form validation
+[x] Form validation
 
-[X] Bug: Unable to process file too big. Solved, not using "read" method anymore. 
+[x] Bug: Unable to process file too big. Solved, not using "read" method anymore.
 
-[ ] Install Charlock_Holmes gem.
+[x] Install Charlock_Holmes gem.
 
 ## XML/JSON converter
 

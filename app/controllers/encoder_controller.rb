@@ -1,4 +1,5 @@
 class EncoderController < ApplicationController
+
   def index
   end
 
@@ -18,11 +19,16 @@ class EncoderController < ApplicationController
 
     File.foreach(file_data) do |line|
       if line.valid_encoding?
-        @input << line.encode("UTF-8", invalid: :replace)
-        @output = "No invalid characters"
+
+        detection = CharlockHolmes::EncodingDetector.detect(line)
+        utf8_encoded_content = CharlockHolmes::Converter.convert line, detection[:encoding], 'UTF-8'
+        @input << utf8_encoded_content
+        @output << line.encode("UTF-8", invalid: :replace)
       else
-        @input << line.encode("UTF-8", invalid: :replace)
-        @output << line.encode("UTF-8", invalid: :replace, replace: "ERROR")
+        detection = CharlockHolmes::EncodingDetector.detect(line)
+        utf8_encoded_content = CharlockHolmes::Converter.convert line, detection[:encoding], 'UTF-8'
+        @input << utf8_encoded_content
+        @output << line.encode("UTF-8", invalid: :replace)
       end
     end
 
