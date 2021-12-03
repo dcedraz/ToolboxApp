@@ -4,6 +4,9 @@ class EncoderController < ApplicationController
   end
 
   def upload
+    #Accepted file formats to be uploaded
+    accepted_formats = %r{.*json.*|.*csv.*|.*txt.*}
+
     if params[:userfile] && !params[:userfile].blank?
       file_data = uploads_params()
     else
@@ -14,9 +17,7 @@ class EncoderController < ApplicationController
       return
     end
 
-    file_data.respond_to?(:read) ? file_converter(file_data) : flash.now[:notice] = "Invalid file format."
-
-    #flash.now[:notice] = "File was successfully loaded."
+    accepted_formats.match?(File.extname(file_data)) ? file_converter(file_data) : flash.now[:notice] = "Invalid file format. It only accepts .json, .csv, .txt."
 
     render "index"
   end
@@ -27,7 +28,7 @@ class EncoderController < ApplicationController
     @output = ""
     invalid_chars = 0
 
-    File.foreach(file) do |line|
+    IO.foreach(file) do |line|
 
       detection = CharlockHolmes::EncodingDetector.detect(line)
       utf8_encoded_content = CharlockHolmes::Converter.convert line, detection[:encoding], 'UTF-8'
