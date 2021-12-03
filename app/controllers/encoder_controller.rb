@@ -37,7 +37,7 @@ class EncoderController < ApplicationController
 
       invalid_chars += 1 if !(line.valid_encoding?)
     end
-    flash.now[:notice] = "Found #{invalid_chars} invalid characters"
+    flash.now[:notice] = "Found #{invalid_chars} invalid characters on file: #{File.basename(file)}"
 
   end
 
