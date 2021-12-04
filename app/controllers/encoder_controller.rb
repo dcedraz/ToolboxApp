@@ -17,7 +17,7 @@ class EncoderController < ApplicationController
       return
     end
 
-    accepted_formats.match?(File.extname(file_data)) ? file_converter(file_data) : flash.now[:notice] = "Invalid file format. It only accepts .json, .csv, .txt. #{File.basename(file_data)}"
+    accepted_formats.match?(File.extname(file_data)) ? file_converter(file_data) : flash.now[:notice] = "Invalid file format. It only accepts .json, .csv, or .txt. Uploaded: #{File.extname(file_data)}"
 
     render "index"
   end
@@ -37,7 +37,7 @@ class EncoderController < ApplicationController
 
       invalid_chars += 1 if !(line.valid_encoding?)
     end
-    flash.now[:notice] = "Found #{invalid_chars} invalid characters"
+    flash.now[:notice] = "Found #{invalid_chars} invalid characters in file: #{file.original_filename}"
 
   end
 
