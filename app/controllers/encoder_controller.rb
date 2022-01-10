@@ -5,7 +5,7 @@ class EncoderController < ApplicationController
 
   def upload
     #Accepted file formats to be uploaded
-    accepted_formats = %r{.*json.*|.*csv.*|.*txt.*}
+    accepted_formats = %r{.*JSON.*|.*json.*|.*csv.*|.*txt.*}
 
     if params[:userfile] && !params[:userfile].blank?
       file_data = uploads_params()
@@ -40,7 +40,6 @@ class EncoderController < ApplicationController
     flash.now[:notice] = "Found #{invalid_chars} invalid characters in file: #{file.original_filename}"
 
   end
-
 
   private
 
